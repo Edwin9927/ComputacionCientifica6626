@@ -4,6 +4,8 @@
  */
 package Principal;
 
+import Entidades.Circunferencia;
+import Entidades.Segmento;
 import Entidades.Vector;
 import Utilidades.Util;
 import java.awt.Color;
@@ -44,6 +46,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnInterpolarColores = new javax.swing.JButton();
         btnPintarPixel = new javax.swing.JButton();
         btnSecuenciaPixceles = new javax.swing.JButton();
+        btnSegmento = new javax.swing.JButton();
+        btnCircunferencia = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gráficos 2D - 6626");
@@ -51,9 +55,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         JViewPort.setAlignmentX(0.0F);
         JViewPort.setAlignmentY(0.0F);
-        JViewPort.setMaximumSize(new java.awt.Dimension(700, 500));
-        JViewPort.setMinimumSize(new java.awt.Dimension(700, 500));
-        JViewPort.setPreferredSize(new java.awt.Dimension(700, 500));
+        JViewPort.setMaximumSize(new java.awt.Dimension(710, 510));
+        JViewPort.setMinimumSize(new java.awt.Dimension(710, 510));
+        JViewPort.setPreferredSize(new java.awt.Dimension(710, 510));
 
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -91,6 +95,20 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnSegmento.setText("Segmento");
+        btnSegmento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSegmentoActionPerformed(evt);
+            }
+        });
+
+        btnCircunferencia.setText("Circunferencia");
+        btnCircunferencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCircunferenciaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -100,11 +118,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(JViewPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnSecuenciaPixceles, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
-                            .addComponent(btnPintarPixel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnInterpolarColores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BtnPintar2Colores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnSecuenciaPixceles, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                            .addComponent(btnPintarPixel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnInterpolarColores, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BtnPintar2Colores, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnSegmento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnCircunferencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(224, 224, 224)
                         .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -122,7 +142,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnPintarPixel)
                         .addGap(18, 18, 18)
-                        .addComponent(btnSecuenciaPixceles))
+                        .addComponent(btnSecuenciaPixceles)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSegmento)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCircunferencia))
                     .addComponent(JViewPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -176,11 +200,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void btnSecuenciaPixcelesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSecuenciaPixcelesActionPerformed
         Vector v = new Vector ();
         
-        double x = -1.0;
+        double x = -2.0;
         
         do{
             v.setX0(x);
-            v.setY0(x);
+            v.setY0(x * x - 5);
             v.setColor(Color.RED);
 
             v.encender(canvas);
@@ -190,6 +214,92 @@ public class FrmPrincipal extends javax.swing.JFrame {
         
         viewPort.Pintar(canvas);
     }//GEN-LAST:event_btnSecuenciaPixcelesActionPerformed
+
+    private void btnSegmentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSegmentoActionPerformed
+        // TODO add your handling code here:
+        Segmento s1 = new Segmento();
+        s1.setX0(-7.0);
+        s1.setY0(-5.0);
+        
+        s1.setXf(5.0);
+        s1.setYf(4.0);
+        
+        s1.setColor(Color.BLACK);
+        
+        s1.encender(canvas);
+        
+        Segmento s2 = new Segmento();
+        s2.setX0(-4.0);
+        s2.setY0(4.0);
+        
+        s2.setXf(5.0);
+        s2.setYf(-5.0);
+        
+        s2.setColor(Color.RED);
+        
+        s2.encender(canvas);
+        
+        Segmento s3 = new Segmento();
+        s3.setX0(-3.0);
+        s3.setY0(4.0);
+        
+        s3.setXf(-4.5);
+        s3.setYf(-5.0);
+        
+        s3.setColor(Color.BLUE);
+        
+        s3.encender(canvas);
+        
+        
+        
+        viewPort.Pintar(canvas);
+        
+    }//GEN-LAST:event_btnSegmentoActionPerformed
+
+    private void btnCircunferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCircunferenciaActionPerformed
+        // TODO add your handling code here:
+        /*
+        Circunferencia c = new Circunferencia();
+        c.setX0(1.0);
+        c.setY0(1.0);
+        
+        c.setRadio(2);
+        
+        c.setColor(Color.yellow);
+        
+        c.encender(canvas);
+        */
+        Circunferencia c1 = new Circunferencia();
+        c1.setX0(-2.5);
+        c1.setY0(.5);
+        
+        c1.setRadio(1);
+        
+        c1.setColor(Color.MAGENTA);
+        
+        c1.encender(canvas);
+        
+        Circunferencia c2 = new Circunferencia();
+        c2.setX0(0.0);
+        c2.setY0(2.3);
+        
+        c2.setRadio(1.5);
+        
+        c2.setColor(Color.CYAN);
+        
+        c2.encender(canvas);
+        
+        Circunferencia c3 = new Circunferencia();
+        c3.setX0(3.0);
+        c3.setY0(.0);
+        
+        c3.setRadio(1.5);
+        
+        c3.setColor(Color.ORANGE);
+        
+        c3.encender(canvas);
+        viewPort.Pintar(canvas);
+    }//GEN-LAST:event_btnCircunferenciaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -240,9 +350,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnPintar2Colores;
     private javax.swing.JPanel JViewPort;
+    private javax.swing.JButton btnCircunferencia;
     private javax.swing.JButton btnInterpolarColores;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnPintarPixel;
     private javax.swing.JButton btnSecuenciaPixceles;
+    private javax.swing.JButton btnSegmento;
     // End of variables declaration//GEN-END:variables
 }

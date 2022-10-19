@@ -32,11 +32,13 @@
                   <Group type="102" attributes="0">
                       <Component id="JViewPort" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="btnSecuenciaPixceles" pref="192" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btnSecuenciaPixceles" alignment="1" pref="192" max="32767" attributes="0"/>
                           <Component id="btnPintarPixel" alignment="1" max="32767" attributes="0"/>
                           <Component id="btnInterpolarColores" alignment="1" max="32767" attributes="0"/>
                           <Component id="BtnPintar2Colores" alignment="1" max="32767" attributes="0"/>
+                          <Component id="btnSegmento" max="32767" attributes="0"/>
+                          <Component id="btnCircunferencia" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -61,6 +63,10 @@
                       <Component id="btnPintarPixel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnSecuenciaPixceles" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnSegmento" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnCircunferencia" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="JViewPort" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -77,13 +83,13 @@
         <Property name="alignmentX" type="float" value="0.0"/>
         <Property name="alignmentY" type="float" value="0.0"/>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[700, 500]"/>
+          <Dimension value="[710, 510]"/>
         </Property>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[700, 500]"/>
+          <Dimension value="[710, 510]"/>
         </Property>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[700, 500]"/>
+          <Dimension value="[710, 510]"/>
         </Property>
       </Properties>
 
@@ -130,6 +136,22 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSecuenciaPixcelesActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnSegmento">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Segmento"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSegmentoActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnCircunferencia">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Circunferencia"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCircunferenciaActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
