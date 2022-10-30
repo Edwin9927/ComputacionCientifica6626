@@ -19,14 +19,14 @@ public class Vector extends ModelosMatematicos{
     
     public Vector (Double x0, Double y0, Color color) {
         this.x0 = x0;
-        this. y0 = y0;
-        this. color = color;
+        this.y0 = y0;
+        this.color = color;
     }
     
     public Vector() {
         this.x0 = 0.0;
         this.y0 = 0.0;
-        this. color = Color.BLACK;
+        this.color = Color.BLACK;
     }
 
     public Double getX0() {
@@ -57,6 +57,10 @@ public class Vector extends ModelosMatematicos{
         pantalla(x0,y0);
         if (sx >= 0 & sx < 700 && sy >= 0 && sy < 500)
             canvas.setRGB(sx, sy, color.getRGB());
+    }
+    
+    public void apagar (BufferedImage canvas){
+        encender(canvas);
     }
     
 }

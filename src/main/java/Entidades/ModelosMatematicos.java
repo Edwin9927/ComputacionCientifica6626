@@ -18,8 +18,8 @@ public class ModelosMatematicos {
     protected double x1 = -7;
     protected double y1 = -5;
     
-    protected double x2 = 5;
-    protected double y2 = 4;
+    protected double x2 = 7;
+    protected double y2 = 5;
     
     protected int sx;
     protected int sy;
