@@ -5,6 +5,8 @@
 package Principal;
 
 import Entidades.Circunferencia;
+import Entidades.Epicicloide;
+import Entidades.Hipocicloide;
 import Entidades.Lazo;
 import Entidades.Margarita;
 import Entidades.Segmento;
@@ -14,6 +16,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -42,10 +46,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
+        jMenu3 = new javax.swing.JMenu();
         JViewPort = new javax.swing.JPanel();
         btnLimpiar0 = new javax.swing.JButton();
-        BtnPintar2Colores = new javax.swing.JButton();
-        btnInterpolarColores = new javax.swing.JButton();
+        BtnPintar2Colores1 = new javax.swing.JButton();
+        btnInterpolarColores1 = new javax.swing.JButton();
         btnPintarPixel = new javax.swing.JButton();
         btnSecuenciaPixceles = new javax.swing.JButton();
         btnSegmento = new javax.swing.JButton();
@@ -54,6 +60,26 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnMargarita = new javax.swing.JButton();
         btnPuntos = new javax.swing.JButton();
         btnEjes = new javax.swing.JButton();
+        btnFigurasBasicas = new javax.swing.JButton();
+        btnBorrarSeg = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jmParcial1 = new javax.swing.JMenu();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jmColores = new javax.swing.JMenu();
+        BtnPintar2Colores = new javax.swing.JMenuItem();
+        btnInterpolarColores = new javax.swing.JMenuItem();
+        jMPixcel = new javax.swing.JMenu();
+        jMSegmento = new javax.swing.JMenu();
+        btnEncSegmento = new javax.swing.JMenuItem();
+        btnApaSegmento = new javax.swing.JMenuItem();
+        jMCircunferencia = new javax.swing.JMenu();
+        btnPrueba = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+
+        jCheckBoxMenuItem1.setSelected(true);
+        jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
+
+        jMenu3.setText("jMenu3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gráficos 2D - 6626");
@@ -72,18 +98,18 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
-        BtnPintar2Colores.setText("Pintar 2 Colores");
-        BtnPintar2Colores.setPreferredSize(new java.awt.Dimension(157, 29));
-        BtnPintar2Colores.addActionListener(new java.awt.event.ActionListener() {
+        BtnPintar2Colores1.setText("Pintar 2 Colores");
+        BtnPintar2Colores1.setPreferredSize(new java.awt.Dimension(157, 29));
+        BtnPintar2Colores1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnPintar2ColoresActionPerformed(evt);
+                BtnPintar2Colores1ActionPerformed(evt);
             }
         });
 
-        btnInterpolarColores.setText("Interpolar Colores");
-        btnInterpolarColores.addActionListener(new java.awt.event.ActionListener() {
+        btnInterpolarColores1.setText("Interpolar Colores");
+        btnInterpolarColores1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnInterpolarColoresActionPerformed(evt);
+                btnInterpolarColores1ActionPerformed(evt);
             }
         });
 
@@ -143,29 +169,93 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnFigurasBasicas.setText("Figuras Basicas");
+        btnFigurasBasicas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFigurasBasicasActionPerformed(evt);
+            }
+        });
+
+        btnBorrarSeg.setText("Animacion");
+        btnBorrarSeg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarSegActionPerformed(evt);
+            }
+        });
+
+        jmParcial1.setText("Parcial I");
+        jmParcial1.add(jSeparator1);
+
+        jmColores.setText("Colores");
+
+        BtnPintar2Colores.setText("Pintar 2 Colores");
+        jmColores.add(BtnPintar2Colores);
+
+        btnInterpolarColores.setText("Interpolar Colores");
+        jmColores.add(btnInterpolarColores);
+
+        jmParcial1.add(jmColores);
+
+        jMPixcel.setText("Pixcel");
+        jmParcial1.add(jMPixcel);
+
+        jMSegmento.setText("Segmento");
+
+        btnEncSegmento.setText("Encender");
+        jMSegmento.add(btnEncSegmento);
+
+        btnApaSegmento.setText("Apagar");
+        btnApaSegmento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApaSegmentoActionPerformed(evt);
+            }
+        });
+        jMSegmento.add(btnApaSegmento);
+
+        jmParcial1.add(jMSegmento);
+
+        jMCircunferencia.setText("Circunferencia");
+        jmParcial1.add(jMCircunferencia);
+
+        btnPrueba.setText("Prueba");
+        btnPrueba.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPruebaActionPerformed(evt);
+            }
+        });
+        jmParcial1.add(btnPrueba);
+
+        jMenuBar1.add(jmParcial1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(JViewPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnSecuenciaPixceles, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
-                            .addComponent(btnPintarPixel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnInterpolarColores, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BtnPintar2Colores, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnSegmento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnCircunferencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnLazo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnMargarita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnPuntos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEjes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(JViewPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(224, 224, 224)
                         .addComponent(btnLimpiar0, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnSecuenciaPixceles, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                    .addComponent(btnPintarPixel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnInterpolarColores1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnPintar2Colores1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSegmento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCircunferencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLazo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnMargarita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnPuntos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEjes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnFigurasBasicas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnBorrarSeg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -173,10 +263,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(JViewPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnLimpiar0, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
-                        .addComponent(BtnPintar2Colores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtnPintar2Colores1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnInterpolarColores)
+                        .addComponent(btnInterpolarColores1)
                         .addGap(18, 18, 18)
                         .addComponent(btnPintarPixel)
                         .addGap(18, 18, 18)
@@ -192,17 +286,18 @@ public class FrmPrincipal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnPuntos)
                         .addGap(18, 18, 18)
-                        .addComponent(btnEjes))
-                    .addComponent(JViewPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addComponent(btnLimpiar0, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnEjes)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnFigurasBasicas)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnBorrarSeg)))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BtnPintar2ColoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPintar2ColoresActionPerformed
+    private void BtnPintar2Colores1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPintar2Colores1ActionPerformed
         for(int i = 0; i<700; i++){
             for(int j = 0; j < 500; j++){
                 if(i<350)
@@ -212,13 +307,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         }
         viewPort.Pintar(canvas);
-    }//GEN-LAST:event_BtnPintar2ColoresActionPerformed
+    }//GEN-LAST:event_BtnPintar2Colores1ActionPerformed
 
     private void btnLimpiar0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiar0ActionPerformed
         viewPort.limpiar();
     }//GEN-LAST:event_btnLimpiar0ActionPerformed
 
-    private void btnInterpolarColoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInterpolarColoresActionPerformed
+    private void btnInterpolarColores1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInterpolarColores1ActionPerformed
         for(int i = 0; i < 700; i++){
             for(int j = 0; j < 500; j++){
                 int c1 = (int) Util.interpolar2Puntos(i, 0.0, 255.0, 699.0, 0.0);
@@ -229,7 +324,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         }
         viewPort.Pintar(canvas);
-    }//GEN-LAST:event_btnInterpolarColoresActionPerformed
+    }//GEN-LAST:event_btnInterpolarColores1ActionPerformed
 
     private void btnPintarPixelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPintarPixelActionPerformed
         Vector v = new Vector ();
@@ -270,10 +365,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
         s1.setXf(5.0);
         s1.setYf(4.0);
         
-        s1.setColor(Color.BLACK);
+        //s1.setColor(Color.BLACK);
         
         s1.encender(canvas);
-        
+        /*
         Segmento s2 = new Segmento();
         s2.setX0(-4.0);
         s2.setY0(4.0);
@@ -295,7 +390,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         s3.setColor(Color.BLUE);
         
         s3.encender(canvas);
-        
+        */
         
         
         viewPort.Pintar(canvas);
@@ -441,6 +536,104 @@ public class FrmPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnEjesActionPerformed
 
+    private void btnFigurasBasicasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFigurasBasicasActionPerformed
+        // TODO add your handling code here:
+        Segmento s1 = new Segmento();
+        s1.setX0(0.0);
+        s1.setY0(-5.0);
+        s1.setXf(7.0);
+        s1.setYf(0.0);
+        s1.setColor(Color.cyan);
+        s1.encender(canvas);
+        
+        
+        Circunferencia c = new Circunferencia();
+        c.setX0(3.5);
+        c.setY0(2.5);
+        c.setRadio(1.5);
+        c.setColor(Color.magenta);
+        c.encender(canvas);
+        
+        Lazo l = new Lazo();
+        l.setX0(-3.5);
+        l.setY0(2.5);
+        l.setRadio(2.0);
+        l.setColor(Color.GREEN);
+        l.encender(canvas);
+        
+        Margarita m = new Margarita();
+        m.setX0(-3.5);
+        m.setY0(-2.5);
+        m.setRadio(1.9);
+        m.setColor(Color.BLUE);
+        m.encender(canvas);
+        
+        viewPort.Pintar(canvas);
+    }//GEN-LAST:event_btnFigurasBasicasActionPerformed
+
+    private void btnBorrarSegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarSegActionPerformed
+        // TODO add your handling code here:
+        /*
+        Lazo l = new Lazo();
+        double x = (double) -6.0;
+        double y = Math.sin(x);
+        do{
+            l.setX0(x);
+            l.setRadio(0.8);
+            l.setY0(y);
+            l.setColor(Color.black);
+            l.encender(canvas);
+            viewPort.Pintar(canvas);
+            try {
+                
+                Thread.sleep(100);
+                l.setColor(viewPort.getBackground());
+                l.apagar(canvas);
+                viewPort.Pintar(canvas);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            x += 0.3;
+            y = Math.sin(x);
+            
+        } while (x <= 6);
+        */
+        
+        Epicicloide h = new Epicicloide();
+        
+        h.setX0(0.0);
+        h.setY0(0.0);
+        h.setRadio(4.0);
+        h.setRadio2(1.0);
+        h.setColor(Color.black);
+        h.encender(canvas);
+        viewPort.Pintar(canvas);
+        
+    }//GEN-LAST:event_btnBorrarSegActionPerformed
+
+    private void btnApaSegmentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApaSegmentoActionPerformed
+        // TODO add your handling code here:
+        Segmento s1 = new Segmento();
+        s1.setX0(-7.0);
+        s1.setY0(-5.0);
+        
+        s1.setXf(5.0);
+        s1.setYf(4.0);
+        
+        s1.setColor(viewPort.getBackground());
+        
+        s1.apagar(canvas);
+        
+        viewPort.Pintar(canvas);
+    }//GEN-LAST:event_btnApaSegmentoActionPerformed
+
+    private void btnPruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPruebaActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_btnPruebaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -488,17 +681,34 @@ public class FrmPrincipal extends javax.swing.JFrame {
     ViewPort viewPort;
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnPintar2Colores;
+    private javax.swing.JMenuItem BtnPintar2Colores;
+    private javax.swing.JButton BtnPintar2Colores1;
     private javax.swing.JPanel JViewPort;
+    private javax.swing.JMenuItem btnApaSegmento;
+    private javax.swing.JButton btnBorrarSeg;
     private javax.swing.JButton btnCircunferencia;
     private javax.swing.JButton btnEjes;
-    private javax.swing.JButton btnInterpolarColores;
+    private javax.swing.JMenuItem btnEncSegmento;
+    private javax.swing.JButton btnFigurasBasicas;
+    private javax.swing.JMenuItem btnInterpolarColores;
+    private javax.swing.JButton btnInterpolarColores1;
     private javax.swing.JButton btnLazo;
     private javax.swing.JButton btnLimpiar0;
     private javax.swing.JButton btnMargarita;
     private javax.swing.JButton btnPintarPixel;
+    private javax.swing.JMenuItem btnPrueba;
     private javax.swing.JButton btnPuntos;
     private javax.swing.JButton btnSecuenciaPixceles;
     private javax.swing.JButton btnSegmento;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
+    private javax.swing.JMenu jMCircunferencia;
+    private javax.swing.JMenu jMPixcel;
+    private javax.swing.JMenu jMSegmento;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JMenu jmColores;
+    private javax.swing.JMenu jmParcial1;
     // End of variables declaration//GEN-END:variables
 }
