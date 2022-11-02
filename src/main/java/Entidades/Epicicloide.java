@@ -48,8 +48,6 @@ public class Epicicloide extends Circunferencia{
             int g = (int) Util.interpolar2Puntos(v.x0, nradio1y2, 255.0, radio1y2, 0.0);
             int b = (int) Util.interpolar2Puntos(v.x0, nradio1y2, 0.0, radio1y2, 255.0);
             Color color = new Color (r, g, b);
-            System.out.println("x0 = "+ v.x0);
-            System.out.println("y0 = "+ v.y0);
             v.color = color;
             v.encender(canvas);
             t += dt;

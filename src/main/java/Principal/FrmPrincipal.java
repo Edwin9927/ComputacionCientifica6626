@@ -404,9 +404,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
         c.setX0(0.0);
         c.setY0(0.0);
         
-        c.setRadio(2);
+        c.setRadio(4);
         
-        c.setColor(Color.yellow);
+        c.setColor(Color.BLACK);
         
         c.encender(canvas);
         
@@ -444,16 +444,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void btnLazoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLazoActionPerformed
         Lazo l = new Lazo();
-        l.setX0(-3.9);
-        l.setY0(.9);
-        l.setRadio(3.0);
+        l.setX0(1.0);
+        l.setY0(1.0);
+        l.setRadio(4.0);
         l.setColor(Color.black);
-        l.encender(canvas);
-        
-        l.setX0(4.0);
-        l.setY0(-4.0);
-        l.setRadio(.9);
-        l.setColor(Color.RED);
         l.encender(canvas);
         
         viewPort.Pintar(canvas);
@@ -463,8 +457,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void btnMargaritaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMargaritaActionPerformed
         Margarita m = new Margarita();
         
-        m.setX0(0.0);
-        m.setY0(0.0);
+        m.setX0(1.0);
+        m.setY0(1.0);
         m.setRadio(4.0);
         m.setColor(Color.BLUE);
         m.encender(canvas);
@@ -483,10 +477,16 @@ public class FrmPrincipal extends javax.swing.JFrame {
         do{
             v.setX0(t);
             v.setY0(t * t - 3);
-            v.setColor(Color.RED);
-
+            
+            int r = (int) Util.interpolar2Puntos(t, -3.0, 255.0, 5, 0.0);
+            int g = (int) Util.interpolar2Puntos(t, -3.0, 255.0, 5, 0.0);
+            int b = (int) Util.interpolar2Puntos(t, -3.0, 0.0, 5, 255.0);
+            Color color = new Color (r, g, b);
+            v.setColor(color);
+            
             v.encender(canvas);
             
+            /*
             v.setY0(Math.pow(2.0, t));
             v.setColor(Color.blue);
             v.encender(canvas);
@@ -496,7 +496,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             v.setColor(Color.cyan);
             v.encender(canvas);
             
-            
+            */
             t += dt;
         }while(t<=5);
         
@@ -567,16 +567,16 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void btnBorrarSegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarSegActionPerformed
         // TODO add your handling code here:
-        /*
+        
         Lazo l = new Lazo();
-        double x = (double) -6.0;
+        double x = -6.0;
         double y = Math.sin(x);
         do{
             l.setX0(x);
             l.setRadio(0.8);
             l.setY0(y);
             l.setColor(Color.black);
-            l.encender(canvas);
+            l.encenderinterpolado(canvas);
             viewPort.Pintar(canvas);
             try {
                 
@@ -592,8 +592,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
             y = Math.sin(x);
             
         } while (x <= 6);
-        */
         
+        /*
         Epicicloide h = new Epicicloide();
         
         h.setX0(0.0);
@@ -602,6 +602,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         h.setRadio2(1.3);
         h.setColor(Color.yellow);
         h.encender(canvas);
+        */
         viewPort.Pintar(canvas);
         
     }//GEN-LAST:event_btnBorrarSegActionPerformed
