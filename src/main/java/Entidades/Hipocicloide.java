@@ -38,6 +38,6 @@ public class Hipocicloide extends Circunferencia{
             v.y0 = this.y0 + ((radio - radio2) * Math.sin(t)) + (radio2 * Math.sin(t * (1-(radio/radio2))));
             v.encender(canvas);
             t+=dt;
-        } while(t <= 2 * Math.PI);
+        } while(t <= 15 * Math.PI);
     }
 }

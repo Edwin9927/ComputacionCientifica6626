@@ -598,9 +598,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
         
         h.setX0(0.0);
         h.setY0(0.0);
-        h.setRadio(2.3);
-        h.setRadio2(1.0);
-        h.setColor(Color.black);
+        h.setRadio(1.8);
+        h.setRadio2(1.3);
+        h.setColor(Color.yellow);
         h.encender(canvas);
         viewPort.Pintar(canvas);
         
