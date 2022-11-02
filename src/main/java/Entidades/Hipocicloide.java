@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Entidades;
 
 import java.awt.Color;
@@ -42,8 +38,6 @@ public class Hipocicloide extends Circunferencia{
             v.y0 = this.y0 + ((radio - radio2) * Math.sin(t)) + (radio2 * Math.sin(t * (1-(radio/radio2))));
             v.encender(canvas);
             t+=dt;
-            System.out.println("X0 = " + v.x0);
-            System.out.println("Y0 = " + v.y0);
-        }while(t <= 2 * Math.PI);
+        } while(t <= 2 * Math.PI);
     }
 }

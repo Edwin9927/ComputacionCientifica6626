@@ -4,6 +4,7 @@
  */
 package Entidades;
 
+import Utilidades.Util;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 
@@ -34,17 +35,22 @@ public class Epicicloide extends Circunferencia{
     public void encender(BufferedImage canvas) {
         double t = 0.0;
         double dt = 0.001;
+        double limi = Math.PI * 15;
+        //double limi = 360;
         
         Vector v = new Vector(x0,y0, color);
         
         do{
             v.x0 = this.x0 + ((radio - radio2) * Math.cos(t)) + (radio2 * Math.cos(t * (1 + (radio/radio2))));
             v.y0 = this.y0 + ((radio - radio2) * Math.sin(t)) + (radio2 * Math.sin(t * (1 + (radio/radio2))));
+            int r = (int) Util.interpolar2Puntos(v.x0, -radio, 255.0, radio, 0.0);
+            int g = (int) Util.interpolar2Puntos(v.x0, -radio, 255.0, radio, 0.0);
+            int b = (int) Util.interpolar2Puntos(v.x0, -radio, 0.0, radio, 255.0);
+            Color color = new Color (r, g, b);
+            v.color = color;
             v.encender(canvas);
             t += dt;
-            System.out.println("X0 = " + v.x0);
-            System.out.println("Y0 = " + v.y0);
-        }while(t <= 2 * Math.PI);
+        }while(t <= limi);
     }
     
 }

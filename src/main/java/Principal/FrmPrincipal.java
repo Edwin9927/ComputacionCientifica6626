@@ -463,16 +463,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void btnMargaritaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMargaritaActionPerformed
         Margarita m = new Margarita();
         
-        m.setX0(3.0);
-        m.setY0(2.0);
-        m.setRadio(1.9);
+        m.setX0(0.0);
+        m.setY0(0.0);
+        m.setRadio(4.0);
         m.setColor(Color.BLUE);
-        m.encender(canvas);
-        
-        m.setX0(-5.5);
-        m.setY0(-3.5);
-        m.setRadio(1.4);
-        m.setColor(Color.MAGENTA);
         m.encender(canvas);
         
         viewPort.Pintar(canvas);
@@ -604,7 +598,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         
         h.setX0(0.0);
         h.setY0(0.0);
-        h.setRadio(4.0);
+        h.setRadio(2.3);
         h.setRadio2(1.0);
         h.setColor(Color.black);
         h.encender(canvas);

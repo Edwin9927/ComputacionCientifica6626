@@ -26,6 +26,8 @@ public class Margarita extends Circunferencia {
 
         double t = 0.0;
         double dt = 0.001;
+        
+        
 
         Vector v = new Vector(x0, y0, color);
 
