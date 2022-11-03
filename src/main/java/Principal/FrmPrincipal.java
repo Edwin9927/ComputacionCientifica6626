@@ -316,11 +316,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void btnInterpolarColores1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInterpolarColores1ActionPerformed
         for(int i = 0; i < 700; i++){
             for(int j = 0; j < 500; j++){
-                int c1 = (int) Util.interpolar2Puntos(i, 0.0, 255.0, 699.0, 0.0);
-                int c2 = (int) Util.interpolar2Puntos(i, 0.0, 0.0, 699.0, 0.0);
-                int c3 = (int) Util.interpolar2Puntos(i, 0.0, 0.0, 699.0, 255.0);
-                Color color = new Color (c1, c2, c3);
-                viewPort.pintarPixelCanvas(i, j, color, canvas);
+                    int c1 = (int) Util.interpolar3Puntos(i, 0.0, 0.0, 349.0, 255.0, 699.0, 0.0);
+                    int c2 = (int) Util.interpolar3Puntos(i, 0.0, 0.0, 349.0, 255.0, 699.0, 0.0);
+                    int c3 = (int) Util.interpolar3Puntos(i, 0.0, 255.0, 349.0, 255.0, 699.0, 255.0);
+                    Color color = new Color (c1, c2, c3);
+                    viewPort.pintarPixelCanvas(i, j, color, canvas);
+                
+                
             }
         }
         viewPort.Pintar(canvas);
