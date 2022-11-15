@@ -61,8 +61,6 @@ public class Lazo extends Circunferencia{
             int b = (int) Util.interpolar2Puntos(v.x0, limI, 0.0, limS, 255.0);
             Color color = new Color (r, g, b);
             v.color = color;
-            
-            System.out.println("x = "+v.x0);
             v. encender (canvas);
             t += dt;
             

@@ -9,8 +9,11 @@ import Entidades.Epicicloide;
 import Entidades.Hipocicloide;
 import Entidades.Lazo;
 import Entidades.Margarita;
+import Entidades.Mariposa;
 import Entidades.Segmento;
+import Entidades.Segmento3D;
 import Entidades.Vector;
+import Entidades.Vector3D;
 import Utilidades.Util;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -75,6 +78,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMCircunferencia = new javax.swing.JMenu();
         btnPrueba = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMPrueba = new javax.swing.JMenuItem();
+        jmEjes3D = new javax.swing.JMenuItem();
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
@@ -82,7 +87,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu3.setText("jMenu3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Gráficos 2D - 6626");
+        setTitle("Gráficos 3D - 6626");
         setPreferredSize(new java.awt.Dimension(920, 620));
 
         JViewPort.setAlignmentX(0.0F);
@@ -227,7 +232,24 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jmParcial1);
 
-        jMenu2.setText("Edit");
+        jMenu2.setText("Parcial II");
+
+        jMPrueba.setText("Prueba");
+        jMPrueba.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMPruebaActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMPrueba);
+
+        jmEjes3D.setText("Ejes");
+        jmEjes3D.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmEjes3DActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jmEjes3D);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -316,13 +338,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void btnInterpolarColores1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInterpolarColores1ActionPerformed
         for(int i = 0; i < 700; i++){
             for(int j = 0; j < 500; j++){
-                    int c1 = (int) Util.interpolar3Puntos(i, 0.0, 0.0, 349.0, 255.0, 699.0, 0.0);
-                    int c2 = (int) Util.interpolar3Puntos(i, 0.0, 0.0, 349.0, 255.0, 699.0, 0.0);
-                    int c3 = (int) Util.interpolar3Puntos(i, 0.0, 255.0, 349.0, 255.0, 699.0, 255.0);
-                    Color color = new Color (c1, c2, c3);
-                    viewPort.pintarPixelCanvas(i, j, color, canvas);
-                
-                
+                int r = (int) Util.interpolar3Puntos(i, 0.0, 100.0, 350.0, 255.0, 700.0, 100.0);
+                int g = (int) Util.interpolar3Puntos(i, 0.0, 100.0, 350.0, 255.0, 700.0, 100.0);
+                int b = (int) Util.interpolar3Puntos(i, 0.0, 150.0, 350.0, 255.0, 700.0, 150.0);
+                Color color = new Color(r, g, b);
+                viewPort.pintarPixelCanvas(i, j, color, canvas);
             }
         }
         viewPort.Pintar(canvas);
@@ -489,14 +509,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
             v.encender(canvas);
             
             /*
-            v.setY0(Math.pow(2.0, t));
-            v.setColor(Color.blue);
-            v.encender(canvas);
+            v3d.setY0(Math.pow(2.0, t));
+            v3d.setColor(Color.blue);
+            v3d.encender(canvas);
             
             
-            v.setY0(Math.sin(t));
-            v.setColor(Color.cyan);
-            v.encender(canvas);
+            v3d.setY0(Math.sin(t));
+            v3d.setColor(Color.cyan);
+            v3d.encender(canvas);
             
             */
             t += dt;
@@ -509,22 +529,24 @@ public class FrmPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         Segmento s3 = new Segmento();
         
-        s3.setX0(-7.0);
+        s3.setX0(0.0);
         s3.setY0(.0);
-        
         s3.setXf(7.0);
         s3.setYf(0.0);
-        
-        s3.setColor(Color.black);
-        
+        s3.setColor(Color.black);        
         s3.encender(canvas);
         
-        s3.setX0(.0);
-        s3.setY0(5.0);
-        
+        s3.setX0(0.0);
+        s3.setY0(0.0);
         s3.setXf(.0);
-        s3.setYf(-5.0);
+        s3.setYf(5.0);
+        s3.encender(canvas);
         
+        s3.setX0(0.0);
+        s3.setY0(.0);
+        s3.setXf(-5.0);
+        s3.setYf(-5.0);
+        s3.setColor(Color.black);        
         s3.encender(canvas);
         
         
@@ -627,9 +649,116 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void btnPruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPruebaActionPerformed
         // TODO add your handling code here:
+        Mariposa m = new Mariposa();
         
+        m.setX0(0.0);
+        m.setY0(0.0);
+        m.encender(canvas);
+        
+        viewPort.Pintar(canvas);
         
     }//GEN-LAST:event_btnPruebaActionPerformed
+
+    private void jMPruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMPruebaActionPerformed
+        // TODO add your handling code here:
+        Vector3D v3d = new Vector3D();
+        
+        double t = (- Math.PI);
+        
+        do{
+            v3d.setX0((5.3 + Math.cos(53 * t)) * Math.cos(t));
+            v3d.setY0((5.3 + Math.cos(53 * t)) * Math.sin(t));
+            v3d.setZ0(Math.sin(53 * t));
+            v3d.setColor(Color.red);
+
+            v3d.encender(canvas);
+            
+//            v3d.setX0(1.0 + (2 * Math.cos(t)));
+//            v3d.setY0(4.0 + (2 * Math.sin(t)));
+//            v3d.setZ0(t/25);
+//            v3d.setColor(Color.red);
+//
+//            v3d.encender(canvas);
+            
+            
+//            v3d.setX0(2.0 + (2 * Math.cos(t)));
+//            v3d.setY0(-3.0 + (2 * Math.sin(t)));
+//            v3d.setZ0(1 + t/10);
+//            v3d.setColor(Color.cyan);
+//
+//            v3d.encender(canvas);
+//            
+//            
+//            v3d.setX0(Math.cos(t));
+//            v3d.setY0(Math.sin(t));
+//            v3d.setZ0(t/15);
+//            v3d.setColor(Color.blue);
+//
+//            v3d.encender(canvas);
+            
+            t+=0.0001;
+            
+        }while(t<= Math.PI);
+        
+        
+        
+        viewPort.Pintar(canvas);
+    }//GEN-LAST:event_jMPruebaActionPerformed
+
+    private void jmEjes3DActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmEjes3DActionPerformed
+        Segmento3D s3d = new Segmento3D();
+        
+        s3d.setX0(0.0);
+        s3d.setY0(0.0);
+        s3d.setZ0(0.0);
+        
+        s3d.setXf(15.0);
+        s3d.setYf(0.0);
+        s3d.setZf(0.0);
+        
+        s3d.encender(canvas);
+        
+        s3d.setXf(0.0);
+        s3d.setYf(0.0);
+        s3d.setZf(6.0);
+        
+        s3d.encender(canvas);
+        
+        s3d.setXf(0.0);
+        s3d.setYf(10.0);
+        s3d.setZf(0.0);
+        
+        s3d.encender(canvas);
+        
+        
+        Segmento3D s1_3d = new Segmento3D();
+        
+        for (int i = -14; i<=14; i++){
+            s1_3d.setX0((double)i);
+            s1_3d.setY0(-15.0);
+            s1_3d.setZ0(0.0);
+
+            s1_3d.setXf((double)i);
+            s1_3d.setYf(15.0);
+            s1_3d.setZf(0.0);
+
+            s1_3d.encenderP2(canvas);
+            
+            s1_3d.setY0((double)i);
+            s1_3d.setX0(-25.0);
+            s1_3d.setZ0(0.0);
+
+            s1_3d.setYf((double)i);
+            s1_3d.setXf(25.0);
+            s1_3d.setZf(0.0);
+
+            s1_3d.encenderP2(canvas); 
+        }
+        
+        
+        
+        viewPort.Pintar(canvas);
+    }//GEN-LAST:event_jmEjes3DActionPerformed
 
     /**
      * @param args the command line arguments
@@ -700,12 +829,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JMenu jMCircunferencia;
     private javax.swing.JMenu jMPixcel;
+    private javax.swing.JMenuItem jMPrueba;
     private javax.swing.JMenu jMSegmento;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenu jmColores;
+    private javax.swing.JMenuItem jmEjes3D;
     private javax.swing.JMenu jmParcial1;
     // End of variables declaration//GEN-END:variables
 }
