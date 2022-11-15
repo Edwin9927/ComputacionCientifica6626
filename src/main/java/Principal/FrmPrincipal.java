@@ -708,11 +708,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void jmEjes3DActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmEjes3DActionPerformed
         Segmento3D s3d = new Segmento3D();
         
+        s3d.setColor(Color.red);
+        
         s3d.setX0(0.0);
         s3d.setY0(0.0);
         s3d.setZ0(0.0);
         
-        s3d.setXf(15.0);
+        s3d.setXf(8.0);
         s3d.setYf(0.0);
         s3d.setZf(0.0);
         
@@ -720,41 +722,134 @@ public class FrmPrincipal extends javax.swing.JFrame {
         
         s3d.setXf(0.0);
         s3d.setYf(0.0);
-        s3d.setZf(6.0);
+        s3d.setZf(4.0);
         
         s3d.encender(canvas);
         
         s3d.setXf(0.0);
-        s3d.setYf(10.0);
+        s3d.setYf(5.0);
         s3d.setZf(0.0);
         
         s3d.encender(canvas);
         
+        s3d.setColor(Color.gray);
+        /**
+         * Seegmentos de los ejes
+         */
+        s3d.setX0(8.0);
+        s3d.setY0(0.0);
+        s3d.setZ0(0.0);
         
+        s3d.setXf(8.0);
+        s3d.setYf(0.0);
+        s3d.setZf(4.0);
+        
+        s3d.encender(canvas);
+        
+        s3d.setX0(0.0);
+        s3d.setY0(0.0);
+        s3d.setZ0(4.0);
+        
+        s3d.setXf(8.0);
+        s3d.setYf(0.0);
+        s3d.setZf(4.0);
+        
+        s3d.encender(canvas);
+        
+        s3d.setXf(0.0);
+        s3d.setYf(5.0);
+        s3d.setZf(4.0);
+        
+        s3d.encender(canvas);
+        
+        s3d.setX0(0.0);
+        s3d.setY0(5.0);
+        s3d.setZ0(0.0);
+        
+        s3d.setXf(0.0);
+        s3d.setYf(5.0);
+        s3d.setZf(4.0);
+        
+        s3d.encender(canvas);
+        
+        s3d.setX0(8.0);
+        s3d.setY0(0.0);
+        s3d.setZ0(0.0);
+        
+        s3d.setXf(8.0);
+        s3d.setYf(5.0);
+        s3d.setZf(0.0);
+        
+        s3d.encender(canvas);
+        
+        s3d.setX0(8.0);
+        s3d.setY0(5.0);
+        s3d.setZ0(0.0);
+        
+        s3d.setXf(0.0);
+        s3d.setYf(5.0);
+        s3d.setZf(0.0);
+        
+        s3d.encender(canvas);
+        
+        s3d.setX0(0.0);
+        s3d.setY0(5.0);
+        s3d.setZ0(4.0);
+        
+        s3d.setXf(8.0);
+        s3d.setYf(5.0);
+        s3d.setZf(4.0);
+        
+        s3d.encender(canvas);
+        
+        s3d.setX0(8.0);
+        s3d.setY0(0.0);
+        s3d.setZ0(4.0);
+        
+        s3d.setXf(8.0);
+        s3d.setYf(5.0);
+        s3d.setZf(4.0);
+        
+        s3d.encender(canvas);
+        
+        
+        s3d.setX0(8.0);
+        s3d.setY0(5.0);
+        s3d.setZ0(0.0);
+                
+        s3d.setXf(8.0);
+        s3d.setYf(5.0);
+        s3d.setZf(4.0);
+        
+        s3d.encender(canvas);
+        /*
         Segmento3D s1_3d = new Segmento3D();
         
-        for (int i = -14; i<=14; i++){
+        for (int i = 1; i<8; i++){
             s1_3d.setX0((double)i);
-            s1_3d.setY0(-15.0);
+            s1_3d.setY0(0.0);
             s1_3d.setZ0(0.0);
 
             s1_3d.setXf((double)i);
-            s1_3d.setYf(15.0);
+            s1_3d.setYf(5.0);
             s1_3d.setZf(0.0);
 
             s1_3d.encenderP2(canvas);
-            
-            s1_3d.setY0((double)i);
-            s1_3d.setX0(-25.0);
-            s1_3d.setZ0(0.0);
-
-            s1_3d.setYf((double)i);
-            s1_3d.setXf(25.0);
-            s1_3d.setZf(0.0);
-
-            s1_3d.encenderP2(canvas); 
+             
         }
         
+        for (int j = 1; j< 5; j++){
+            s1_3d.setY0((double)j);
+            s1_3d.setX0(0.0);
+            s1_3d.setZ0(0.0);
+
+            s1_3d.setYf((double)j);
+            s1_3d.setXf(8.0);
+            s1_3d.setZf(0.0);
+
+            s1_3d.encenderP2(canvas);
+        }
+        */
         
         
         viewPort.Pintar(canvas);
