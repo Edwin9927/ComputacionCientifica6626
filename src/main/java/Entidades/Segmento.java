@@ -4,6 +4,7 @@
  */
 package Entidades;
 
+import Utilidades.Util;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 
@@ -49,6 +50,11 @@ public class Segmento extends Vector{
         do{
             v.x0 = this.x0 + ((this.xf - this.x0)*t);
             v.y0 = this.y0 + ((this.yf - this.y0)*t);
+            /*int r = (int) Util.interpolar2Puntos(t, 0.0, 255.0, 1.0, 0.0);
+            int g = (int) Util.interpolar2Puntos(t, 0.0, 0.0, 1.0, 0.0);
+            int b = (int) Util.interpolar2Puntos(t, 0.0, 0.0, 1.0, 255.0);
+            Color color = new Color (r, g, b);
+            v.color = color;*/
             v.encender(canvas);
             t+=dt;
         }while(t<=1.0);
