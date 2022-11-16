@@ -12,6 +12,8 @@ import Entidades.Margarita;
 import Entidades.Mariposa;
 import Entidades.Segmento;
 import Entidades.Segmento3D;
+import Entidades.SuperficieR;
+import Entidades.SuperficieV;
 import Entidades.Vector;
 import Entidades.Vector3D;
 import Utilidades.Util;
@@ -661,7 +663,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void jMPruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMPruebaActionPerformed
         // TODO add your handling code here:
-        Vector3D v3d = new Vector3D();
+        /*Vector3D v3d = new Vector3D();
         
         double t = (- Math.PI);
         
@@ -701,6 +703,40 @@ public class FrmPrincipal extends javax.swing.JFrame {
         }while(t<= Math.PI);
         
         
+        SuperficieV s = new SuperficieV();
+        
+        s.setTipo(3);
+        
+        s.setX0(0.0);
+        s.setY0(0.0);
+        s.setZ0(0.0);
+        s.setRd(1.0);
+        s.setColor(Color.BLACK);
+        
+        s.encender(canvas);
+        
+        s.setTipo(2);
+        
+        s.setX0(2.0);
+        s.setY0(0.0);
+        s.setZ0(-1.0);
+        s.setRd(1.0);
+        s.setColor(Color.black);
+        
+        s.encender(canvas);
+        */
+        
+        SuperficieR sr = new SuperficieR();
+        sr.setX0(0.0);
+        sr.setY0(0.0);
+        sr.setZ0(0.0);
+        sr.setTipo(1);
+        
+        sr.setFv(.15);
+        
+        sr.setColor(Color.yellow);
+        
+        sr.encender(canvas);
         
         viewPort.Pintar(canvas);
     }//GEN-LAST:event_jMPruebaActionPerformed
@@ -791,7 +827,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         s3d.setZf(0.0);
         
         s3d.encender(canvas);
-        
+        /*
         s3d.setX0(0.0);
         s3d.setY0(5.0);
         s3d.setZ0(4.0);
@@ -822,7 +858,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         s3d.setZf(4.0);
         
         s3d.encender(canvas);
-        /*
+        
         Segmento3D s1_3d = new Segmento3D();
         
         for (int i = 1; i<8; i++){

@@ -27,6 +27,17 @@ public class Util {
                 (y2 * ((x - x1) / (x2 - x1))));
     }
     
+    /**
+     * Funcion para interpolar 3 puntos
+     * @param x Iterador
+     * @param x1 
+     * @param y1
+     * @param x2
+     * @param y2
+     * @param x3
+     * @param y3
+     * @return f(x) 
+     */
     public static double interpolar3Puntos (double x, 
             double x1, double y1, 
             double x2, double y2, 

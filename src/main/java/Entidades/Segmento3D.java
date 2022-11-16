@@ -12,9 +12,10 @@ import java.awt.image.BufferedImage;
  * @author edwinmanzano
  */
 public class Segmento3D extends Vector3D{
-    protected  Double xf;
-    protected  Double yf;
-    protected  Double zf;
+    
+    protected Double xf;
+    protected Double yf;
+    protected Double zf;
 
     public Segmento3D(Double xf, Double yf, Double zf, Double x0, Double y0, Double z0, Color color) {
         super(x0, y0, z0, color);
