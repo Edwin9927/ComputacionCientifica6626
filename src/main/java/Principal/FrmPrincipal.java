@@ -10,6 +10,7 @@ import Entidades.Hipocicloide;
 import Entidades.Lazo;
 import Entidades.Margarita;
 import Entidades.Mariposa;
+import Entidades.ModelosMatematicos;
 import Entidades.Segmento;
 import Entidades.Segmento3D;
 import Entidades.SuperficieR;
@@ -20,6 +21,9 @@ import Utilidades.Util;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.awt.image.BufferedImage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,8 +40,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
     public FrmPrincipal() {
         viewPort = new ViewPort();
         canvas = viewPort.getCanvas();
+        modelosMat = new ModelosMatematicos();
         
         initComponents();
+        
+        iniciarEventosViewPort();
         
         JViewPort.add(viewPort);
     }
@@ -67,6 +74,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnEjes = new javax.swing.JButton();
         btnFigurasBasicas = new javax.swing.JButton();
         btnBorrarSeg = new javax.swing.JButton();
+        Combo = new javax.swing.JComboBox<>();
+        lblPixeles = new javax.swing.JLabel();
+        lblReal = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jmParcial1 = new javax.swing.JMenu();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
@@ -105,7 +115,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
-        BtnPintar2Colores1.setText("Pintar 2 Colores");
+        BtnPintar2Colores1.setText("Curva");
         BtnPintar2Colores1.setPreferredSize(new java.awt.Dimension(157, 29));
         BtnPintar2Colores1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,35 +123,35 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnInterpolarColores1.setText("Interpolar Colores");
+        btnInterpolarColores1.setText("Tapete 2");
         btnInterpolarColores1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnInterpolarColores1ActionPerformed(evt);
             }
         });
 
-        btnPintarPixel.setText("Encender Pixcel");
+        btnPintarPixel.setText("Tapete 3");
         btnPintarPixel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPintarPixelActionPerformed(evt);
             }
         });
 
-        btnSecuenciaPixceles.setText("Secuencia de Pixceles");
+        btnSecuenciaPixceles.setText("Tapete 4");
         btnSecuenciaPixceles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSecuenciaPixcelesActionPerformed(evt);
             }
         });
 
-        btnSegmento.setText("Segmento");
+        btnSegmento.setText("Tapete 5");
         btnSegmento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSegmentoActionPerformed(evt);
             }
         });
 
-        btnCircunferencia.setText("Circunferencia");
+        btnCircunferencia.setText("Tapete 6");
         btnCircunferencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCircunferenciaActionPerformed(evt);
@@ -189,6 +199,17 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 btnBorrarSegActionPerformed(evt);
             }
         });
+
+        Combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6" }));
+        Combo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboActionPerformed(evt);
+            }
+        });
+
+        lblPixeles.setText("123");
+
+        lblReal.setText("jLabel1");
 
         jmParcial1.setText("Parcial I");
         jmParcial1.add(jSeparator1);
@@ -261,12 +282,20 @@ public class FrmPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(JViewPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(224, 224, 224)
-                        .addComponent(btnLimpiar0, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(27, 27, 27)
+                        .addComponent(JViewPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblPixeles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblReal, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE))
+                        .addGap(108, 108, 108)
+                        .addComponent(btnLimpiar0, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(47, 47, 47)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnSecuenciaPixceles, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
                     .addComponent(btnPintarPixel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -289,7 +318,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(JViewPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnLimpiar0, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnLimpiar0, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblPixeles)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblReal))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addComponent(BtnPintar2Colores1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -314,23 +348,157 @@ public class FrmPrincipal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnFigurasBasicas)
                         .addGap(18, 18, 18)
-                        .addComponent(btnBorrarSeg)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnBorrarSeg)
+                            .addComponent(Combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BtnPintar2Colores1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPintar2Colores1ActionPerformed
-        for(int i = 0; i<700; i++){
-            for(int j = 0; j < 500; j++){
-                if(i<350)
-                    viewPort.pintarPixelCanvas(i, j, Color.RED, canvas);
-                else
-                    viewPort.pintarPixelCanvas(i, j, Color.BLUE, canvas);
+    
+    private void iniciarEventosViewPort(){
+        viewPort.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent evt){
+                lblPixeles.setText("");
+                lblReal.setText("");
+                
+                lblPixeles.setText(String.format("[%d,%d]", evt.getX(), evt.getY()));
+                
+                modelosMat.realXY(evt.getX(), evt.getY());
+                lblReal.setText(String.format("[%.2f,%.2f]", modelosMat.getX(), modelosMat.getY()));
+                
             }
-        }
+        });
+        
+        viewPort.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e){
+                viewPortMousePressed(e);
+            }
+        });
+    }
+    
+    private void viewPortMousePressed(MouseEvent e){
+        modelosMat.realXY(e.getX(), e.getY());
+        
+        System.out.println("Click X:" + modelosMat.getX() + " Y: " + modelosMat.getY());
+        
+        Circunferencia c = new Circunferencia();
+        
+        c.setColor(Color.black);
+        c.setRadio(0.3);
+        c.setX0(modelosMat.getX());
+        c.setY0(modelosMat.getY());
+        c.encender(canvas);
+        
+        
+        Segmento s = new Segmento();
+        
+        s.setColor(Color.yellow);
+        
+        s.setX0(modelosMat.getX());
+        s.setY0(modelosMat.getY());
+        
+        s.setXf(modelosMat.getX());
+        s.setYf(Util.interpolar3Puntos(s.getXf(), -7.0, 0.0, 0.0, 2.72, 7.0, 0.0));
+        
+        s.encender(canvas);
         viewPort.Pintar(canvas);
+    }
+    
+    private void BtnPintar2Colores1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPintar2Colores1ActionPerformed
+//////////// Para pintar de 2 colores
+//        for(int i = 0; i<700; i++){
+//            for(int j = 0; j < 500; j++){
+//                if(i<350)
+//                    viewPort.pintarPixelCanvas(i, j, Color.RED, canvas);
+//                else
+//                    viewPort.pintarPixelCanvas(i, j, Color.BLUE, canvas);
+//            }
+//        }
+//        viewPort.Pintar(canvas);
+/////////// Tapetes
+//        Color[] paleta3 = new Color[16];
+//        int r = 0;
+//        int g = 0;
+//        int b = 0;
+//        //113, 135, 149
+//        //204, 213, 218
+//        for(int i = 0; i<16; i++){
+//            r = (int) Util.interpolar2Puntos(i, 0, 72, 15, 204);
+//            g = (int) Util.interpolar2Puntos(i, 0, 145, 15, 213);
+//            b = (int) Util.interpolar2Puntos(i, 0, 236, 15, 218);
+//            paleta3[i] = new Color (r,g,b);
+//        }
+//        
+//        int colorT;
+//        Color c;
+//        for (int i = 0; i < 700; i++) {
+//            for (int j = 0; j < 500; j++) {
+//                //colorT = (int) (((j * (j + i)) / 2) % 15);
+//                //colorT = (int) (Math.sqrt(i) * j / 100)%15;
+//                colorT = (int)(Math.E * (i / 20) + Math.PI * (Math.pow(j, 2)) + Math.sqrt(j * i)) % 15;
+//                c = paleta3[colorT];
+//                viewPort.pintarPixelCanvas(i, j, c, canvas);
+//            }
+//        }
+            
+//////////  Rebotes con parabolas            
+//            Circunferencia c = new Circunferencia();
+//            c.setRadio(0.3);
+//            c.setColor(Color.black);
+//            Vector vec = new Vector();
+//            vec.setColor(Color.red);
+//            double t = -7, dt = 0.0001;
+//            do
+//            {
+//                vec.setX0(t);
+//                vec.setY0(Util.interpolar3Puntos(t, -7.0, 0.0, -5, 4.5, -3, 0.0));
+//                vec.encender(canvas);
+//                t = t + dt;
+//            } while (t <= -3);
+//
+//            t = -3;
+//            do
+//            {
+//                vec.setX0(t);
+//                vec.setY0(Util.interpolar3Puntos(t, -3.0, 0, 1.0, 4.0, 1.0, 0));
+//                vec.encender(canvas);
+//                t = t + dt;
+//            } while (t <= 3);
+//            t = 3;
+//            do
+//            {
+//                vec.setX0(t);
+//                vec.setY0(Util.interpolar3Puntos(t, 3.0, 0, 4.0, 3.5, 5.0, 0));
+//                vec.encender(canvas);
+//                t = t + dt;
+//            } while (t <= 5);
+//            t = 4;
+////            do
+////            {
+////                vec.setX0(t);
+////                vec.setY0((-Math.pow(t, 2) + (12 * t) - 32) / 3);
+////                
+////                vec.encender(canvas);
+////                t = t + dt;
+////            } while (t <= 8);  
+// Curva
+        Vector v = new Vector();
+        v.setColor(Color.black);
+        double t = -7.0, dt = 0.001;
+        do {            
+            v.setX0(t);
+            v.setY0(Util.interpolar3Puntos(t, -7.0, 0.0, 0.0, 2.72, 7.0, 0.0));
+            v.encender(canvas);
+            t += dt;
+        } while (t <= 7);
+
+        viewPort.Pintar(canvas);
+
     }//GEN-LAST:event_BtnPintar2Colores1ActionPerformed
 
     private void btnLimpiar0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiar0ActionPerformed
@@ -338,101 +506,142 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimpiar0ActionPerformed
 
     private void btnInterpolarColores1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInterpolarColores1ActionPerformed
-        for(int i = 0; i < 700; i++){
-            for(int j = 0; j < 500; j++){
-                int r = (int) Util.interpolar3Puntos(i, 0.0, 100.0, 350.0, 255.0, 700.0, 100.0);
-                int g = (int) Util.interpolar3Puntos(i, 0.0, 100.0, 350.0, 255.0, 700.0, 100.0);
-                int b = (int) Util.interpolar3Puntos(i, 0.0, 150.0, 350.0, 255.0, 700.0, 150.0);
-                Color color = new Color(r, g, b);
-                viewPort.pintarPixelCanvas(i, j, color, canvas);
+//        for(int i = 0; i < 700; i++){
+//            for(int j = 0; j < 500; j++){
+//                int r = (int) Util.interpolar3Puntos(i, 0.0, 100.0, 350.0, 255.0, 700.0, 100.0);
+//                int g = (int) Util.interpolar3Puntos(i, 0.0, 100.0, 350.0, 255.0, 700.0, 100.0);
+//                int b = (int) Util.interpolar3Puntos(i, 0.0, 150.0, 350.0, 255.0, 700.0, 150.0);
+//                Color color = new Color(r, g, b);
+//                viewPort.pintarPixelCanvas(i, j, color, canvas);
+//            }
+//        }
+//        viewPort.Pintar(canvas);
+int colorT;
+        Color c;
+        for (int i = 0; i < 700; i++) {
+            for (int j = 0; j < 500; j++) {
+                //colorT = (int) (((i * (j + Math.pow(i, 2))) / 2) % 15);
+                colorT = (int) (Math.sqrt(Math.pow(i,2)+Math.pow(j,2)))%15;
+                c = paleta1[colorT];
+                viewPort.pintarPixelCanvas(i, j, c, canvas);
             }
         }
-        viewPort.Pintar(canvas);
+        viewPort.Pintar(canvas); 
     }//GEN-LAST:event_btnInterpolarColores1ActionPerformed
 
     private void btnPintarPixelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPintarPixelActionPerformed
-        Vector v = new Vector ();
-        
-        v.setX0(2.0);
-        v.setY0(3.0);
-        v.setColor(Color.RED);
-        
-        v.encender(canvas);
-        
+//        Vector v = new Vector ();
+//        
+//        v.setX0(2.0);
+//        v.setY0(3.0);
+//        v.setColor(Color.RED);
+//        
+//        v.encender(canvas);
+//        
+//        viewPort.Pintar(canvas);
+int colorT;
+        Color c;
+        for (int i = 0; i < 700; i++) {
+            for (int j = 0; j < 500; j++) {
+                colorT = (int) (((Math.pow(j, 2) * (j + i)) / 2) % 15);
+                c = paleta1[colorT];
+                viewPort.pintarPixelCanvas(i, j, c, canvas);
+            }
+        }
         viewPort.Pintar(canvas);
     }//GEN-LAST:event_btnPintarPixelActionPerformed
 
     private void btnSecuenciaPixcelesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSecuenciaPixcelesActionPerformed
-        Vector v = new Vector ();
-        
-        double x = -2.0;
-        
-        do{
-            v.setX0(x);
-            v.setY0(x * x - 5);
-            v.setColor(Color.RED);
-
-            v.encender(canvas);
-            
-            x += 0.05;
-        }while(x<=3);
-        
+//        Vector v = new Vector ();
+//        
+//        double x = -2.0;
+//        
+//        do{
+//            v.setX0(x);
+//            v.setY0(x * x - 5);
+//            v.setColor(Color.RED);
+//
+//            v.encender(canvas);
+//            
+//            x += 0.05;
+//        }while(x<=3);
+//        
+//        viewPort.Pintar(canvas);
+int colorT;
+        Color c;
+        for (int i = 0; i < 700; i++) {
+            for (int j = 0; j < 500; j++) {
+                colorT = (int) (((Math.pow(i, 2) * (j + i)) / 2) % 15);
+                c = paleta1[colorT];
+                viewPort.pintarPixelCanvas(i, j, c, canvas);
+            }
+        }
         viewPort.Pintar(canvas);
     }//GEN-LAST:event_btnSecuenciaPixcelesActionPerformed
 
     private void btnSegmentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSegmentoActionPerformed
         // TODO add your handling code here:
-        Segmento s1 = new Segmento();
-        s1.setX0(-7.0);
-        s1.setY0(-5.0);
-        
-        s1.setXf(5.0);
-        s1.setYf(4.0);
-        
-        //s1.setColor(Color.BLACK);
-        
-        s1.encender(canvas);
-        /*
-        Segmento s2 = new Segmento();
-        s2.setX0(-4.0);
-        s2.setY0(4.0);
-        
-        s2.setXf(5.0);
-        s2.setYf(-5.0);
-        
-        s2.setColor(Color.RED);
-        
-        s2.encender(canvas);
-        
-        Segmento s3 = new Segmento();
-        s3.setX0(-3.0);
-        s3.setY0(4.0);
-        
-        s3.setXf(-4.5);
-        s3.setYf(-5.0);
-        
-        s3.setColor(Color.BLUE);
-        
-        s3.encender(canvas);
-        */
-        
-        
+//        Segmento s1 = new Segmento();
+//        s1.setX0(-7.0);
+//        s1.setY0(-5.0);
+//        
+//        s1.setXf(5.0);
+//        s1.setYf(4.0);
+//        
+//        //s1.setColor(Color.BLACK);
+//        
+//        s1.encender(canvas);
+//        /*
+//        Segmento s2 = new Segmento();
+//        s2.setX0(-4.0);
+//        s2.setY0(4.0);
+//        
+//        s2.setXf(5.0);
+//        s2.setYf(-5.0);
+//        
+//        s2.setColor(Color.RED);
+//        
+//        s2.encender(canvas);
+//        
+//        Segmento s3 = new Segmento();
+//        s3.setX0(-3.0);
+//        s3.setY0(4.0);
+//        
+//        s3.setXf(-4.5);
+//        s3.setYf(-5.0);
+//        
+//        s3.setColor(Color.BLUE);
+//        
+//        s3.encender(canvas);
+//        */
+//        
+//        
+//        viewPort.Pintar(canvas);
+int colorT;
+        Color c;
+        for (int i = 0; i < 700; i++) {
+            for (int j = 0; j < 500; j++) {
+                colorT = (int) (((j * i) * Math.PI) % 15);
+                c = paleta1[colorT];
+                viewPort.pintarPixelCanvas(i, j, c, canvas);
+            }
+        }
         viewPort.Pintar(canvas);
         
     }//GEN-LAST:event_btnSegmentoActionPerformed
 
     private void btnCircunferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCircunferenciaActionPerformed
         // TODO add your handling code here:
-        
-        Circunferencia c = new Circunferencia();
-        c.setX0(0.0);
-        c.setY0(0.0);
-        
-        c.setRadio(4);
-        
-        c.setColor(Color.BLACK);
-        
-        c.encender(canvas);
+//        
+//        Circunferencia c = new Circunferencia();
+//        c.setX0(0.0);
+//        c.setY0(0.0);
+//        
+//        c.setRadio(4);
+//        
+//        c.setColor(Color.BLACK);
+//        
+//        c.encender(canvas);
         
         /*Circunferencia c1 = new Circunferencia();
         c1.setX0(-2.5);
@@ -463,6 +672,16 @@ public class FrmPrincipal extends javax.swing.JFrame {
         c3.setColor(Color.ORANGE);
         
         c3.encender(canvas);*/
+//        viewPort.Pintar(canvas);
+int colorT;
+        Color c;
+        for (int i = 0; i < 700; i++) {
+            for (int j = 0; j < 500; j++) {
+                colorT = (int) Math.random() * 15 + 1;
+                c = paleta1[colorT];
+                viewPort.pintarPixelCanvas(i, j, c, canvas);
+            }
+        }
         viewPort.Pintar(canvas);
     }//GEN-LAST:event_btnCircunferenciaActionPerformed
 
@@ -726,18 +945,28 @@ public class FrmPrincipal extends javax.swing.JFrame {
         s.encender(canvas);
         */
         
-        SuperficieR sr = new SuperficieR();
-        sr.setX0(0.0);
-        sr.setY0(0.0);
-        sr.setZ0(0.0);
-        sr.setTipo(1);
-        
-        sr.setFv(.15);
-        
-        sr.setColor(Color.yellow);
-        
-        sr.encender(canvas);
-        
+//        SuperficieR sr = new SuperficieR();
+//        sr.setX0(0.0);
+//        sr.setY0(0.0);
+//        sr.setZ0(0.0);
+//        sr.setTipo(3);
+//        
+//        sr.setFv(.15);
+//        
+//        sr.setColor(Color.yellow);
+//        
+//        sr.encender(canvas);
+//        
+//        viewPort.Pintar(canvas);
+        int colorT;
+        Color c;
+        for (int i = 0; i < 700; i++) {
+            for (int j = 0; j < 500; j++) {
+                colorT = (int) ((Math.pow(i,2) + j)%15);
+                c = paleta1[colorT];
+                viewPort.pintarPixelCanvas(i, j, c, canvas);
+            }
+        }
         viewPort.Pintar(canvas);
     }//GEN-LAST:event_jMPruebaActionPerformed
 
@@ -891,6 +1120,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
         viewPort.Pintar(canvas);
     }//GEN-LAST:event_jmEjes3DActionPerformed
 
+    private void ComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -937,9 +1170,35 @@ public class FrmPrincipal extends javax.swing.JFrame {
     BufferedImage canvas;
     ViewPort viewPort;
     
+    ModelosMatematicos modelosMat;
+    
+    Color[] paleta1 = 
+    {   Color.black,
+        new Color(29,50,88), //navy
+        Color.green, 
+        new Color(1, 175, 239), //aqua
+        Color.red,
+        new Color(112, 48, 161), //purple
+        new Color(132, 60, 11),
+        Color.lightGray,
+        Color.darkGray,
+        Color.blue,
+        new Color(146, 208, 80),
+        new Color(166, 166, 166),
+        new Color(83, 129, 55),
+        new Color(176, 7, 83),
+        Color.yellow,
+        Color.white
+    };
+    
+    Color[] paleta2;
+
+    // 
+        // 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem BtnPintar2Colores;
     private javax.swing.JButton BtnPintar2Colores1;
+    private javax.swing.JComboBox<String> Combo;
     private javax.swing.JPanel JViewPort;
     private javax.swing.JMenuItem btnApaSegmento;
     private javax.swing.JButton btnBorrarSeg;
@@ -969,5 +1228,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jmColores;
     private javax.swing.JMenuItem jmEjes3D;
     private javax.swing.JMenu jmParcial1;
+    private javax.swing.JLabel lblPixeles;
+    private javax.swing.JLabel lblReal;
     // End of variables declaration//GEN-END:variables
 }
