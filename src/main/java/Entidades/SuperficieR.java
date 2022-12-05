@@ -64,6 +64,36 @@ public class SuperficieR extends Vector3D {
                 } while (x1 <= 5);
                 
                 break;
+            case 2: // 
+                double zeta = -5.0 ; // θ
+                double a = 0.0;
+                do {                    
+                    double fi = 0.0;  // φ 0 a 2PI
+                    do {                        
+                        v3d.x0 = x0 + a;
+                        v3d.y0 = y1;
+                        v3d.z0 = (fv * (Math.pow(x1, 2) + Math.pow(y1, 2))) - 4.5;
+                        v3d.encender(canvas);
+                        fi += dy;
+                    } while (fi <= Math.PI * 2);
+                    zeta += dx;
+                } while (zeta <= 5.0);
+                
+                break;
+            case 3:
+                do {
+                    double y1 = -3.5;
+                    double dy = 0.1;
+                    do {                        
+                        v3d.x0 = x1;
+                        v3d.y0 = y1;
+                        v3d.z0 = -(fv * (Math.pow(x1, 2) - Math.pow(y1, 2)));
+                        v3d.encender(canvas);
+                        y1 += dy;
+                    } while (y1 <= 3.5);
+                    x1 += dx;
+                } while (x1 <= 5);
+                break;
             default:
                 throw new AssertionError();
         }
