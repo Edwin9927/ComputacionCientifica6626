@@ -41,11 +41,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         viewPort = new ViewPort();
         canvas = viewPort.getCanvas();
         modelosMat = new ModelosMatematicos();
-        
+
         initComponents();
-        
+
         iniciarEventosViewPort();
-        
+
         JViewPort.add(viewPort);
     }
 
@@ -123,7 +123,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnInterpolarColores1.setText("Tapete 2");
+        btnInterpolarColores1.setText("Ondas");
         btnInterpolarColores1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnInterpolarColores1ActionPerformed(evt);
@@ -357,58 +357,79 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    private void iniciarEventosViewPort(){
+    private void iniciarEventosViewPort() {
         viewPort.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
-            public void mouseMoved(MouseEvent evt){
+            public void mouseMoved(MouseEvent evt) {
                 lblPixeles.setText("");
                 lblReal.setText("");
-                
+
                 lblPixeles.setText(String.format("[%d,%d]", evt.getX(), evt.getY()));
-                
+
                 modelosMat.realXY(evt.getX(), evt.getY());
                 lblReal.setText(String.format("[%.2f,%.2f]", modelosMat.getX(), modelosMat.getY()));
-                
+
             }
         });
-        
+
         viewPort.addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e){
+            public void mousePressed(MouseEvent e) {
                 viewPortMousePressed(e);
             }
         });
     }
-    
-    private void viewPortMousePressed(MouseEvent e){
+
+    private void viewPortMousePressed(MouseEvent e) {
         modelosMat.realXY(e.getX(), e.getY());
-        
+
         System.out.println("Click X:" + modelosMat.getX() + " Y: " + modelosMat.getY());
-        
+
         Circunferencia c = new Circunferencia();
-        
+
         c.setColor(Color.black);
         c.setRadio(0.3);
         c.setX0(modelosMat.getX());
         c.setY0(modelosMat.getY());
         c.encender(canvas);
-        
-        
+
         Segmento s = new Segmento();
-        
+
         s.setColor(Color.yellow);
-        
+
         s.setX0(modelosMat.getX());
         s.setY0(modelosMat.getY());
+
+        double xp = modelosMat.getX();
+        double yp = Util.interpolar3Puntos(xp, -7.0, 0.0, 0.0, 2.72, 7.0, 0.0);
+        s.setXf(xp);
         
-        s.setXf(modelosMat.getX());
-        s.setYf(Util.interpolar3Puntos(s.getXf(), -7.0, 0.0, 0.0, 2.72, 7.0, 0.0));
-        
+        s.setYf(yp);
+
         s.encender(canvas);
+        
+        s.setColor(Color.red);
+        s.setX0(xp);
+        s.setY0(yp);
+        double xf = 0.0;
+        double dx = Util.dxInterpolar3Puntos(xp, -7.0, 0.0, 0.0, 2.72, 7.0, 0.0);;
+        if(xp < 0){
+             xf = 7;
+             s.setXf(xf);
+             s.setYf(((-1/dx) * (xf - xp)) + yp);
+        } else {
+             xf = -7;
+             s.setXf(xf);
+             s.setYf(((-1/dx) * (xf - xp)) + yp);
+        }
+        s.encender(canvas);
+        
+        
+        
+        
         viewPort.Pintar(canvas);
     }
-    
+
     private void BtnPintar2Colores1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPintar2Colores1ActionPerformed
 //////////// Para pintar de 2 colores
 //        for(int i = 0; i<700; i++){
@@ -445,7 +466,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 //                viewPort.pintarPixelCanvas(i, j, c, canvas);
 //            }
 //        }
-            
+
 //////////  Rebotes con parabolas            
 //            Circunferencia c = new Circunferencia();
 //            c.setRadio(0.3);
@@ -465,7 +486,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 //            do
 //            {
 //                vec.setX0(t);
-//                vec.setY0(Util.interpolar3Puntos(t, -3.0, 0, 1.0, 4.0, 1.0, 0));
+//                vec.setY0(Util.interpolar3Puntos(t, -3.0, 0, 0.0, 4.0, 3.0, 0));
 //                vec.encender(canvas);
 //                t = t + dt;
 //            } while (t <= 3);
@@ -490,7 +511,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         Vector v = new Vector();
         v.setColor(Color.black);
         double t = -7.0, dt = 0.001;
-        do {            
+        do {
             v.setX0(t);
             v.setY0(Util.interpolar3Puntos(t, -7.0, 0.0, 0.0, 2.72, 7.0, 0.0));
             v.encender(canvas);
@@ -498,6 +519,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
         } while (t <= 7);
 
         viewPort.Pintar(canvas);
+        
+        System.out.println("---------------------------------------");
+        System.out.println("dx = "+ Util.dxInterpolar3Puntos(9, -7.0, 0.0, 0.0, 2.72, 7.0, 0.0));
 
     }//GEN-LAST:event_BtnPintar2Colores1ActionPerformed
 
@@ -516,17 +540,36 @@ public class FrmPrincipal extends javax.swing.JFrame {
 //            }
 //        }
 //        viewPort.Pintar(canvas);
-int colorT;
-        Color c;
+//int colorT;
+//        Color c;
+//        for (int i = 0; i < 700; i++) {
+//            for (int j = 0; j < 500; j++) {
+//                //colorT = (int) (((i * (j + Math.pow(i, 2))) / 2) % 15);
+//                colorT = (int) (Math.sqrt(Math.pow(i,2)+Math.pow(j,2)))%15;
+//                c = paleta1[colorT];
+//                viewPort.pintarPixelCanvas(i, j, c, canvas);
+//            }
+//        }
+//        viewPort.Pintar(canvas); 
+
+        double t = 3;
+
+        double x, y, z;
+        double w = 1.1;
+        double v = 9.3;
         for (int i = 0; i < 700; i++) {
             for (int j = 0; j < 500; j++) {
-                //colorT = (int) (((i * (j + Math.pow(i, 2))) / 2) % 15);
-                colorT = (int) (Math.sqrt(Math.pow(i,2)+Math.pow(j,2)))%15;
-                c = paleta1[colorT];
+                modelosMat.realXY(i, j);
+                x = modelosMat.getX();
+                y = modelosMat.getY();
+                z = w * (Math.sqrt(x * x + y * y)) - v * t;
+                z = Math.sin(z) + 1;
+                int color = (int) (z * 7.5);
+                Color c = paleta1[color];
                 viewPort.pintarPixelCanvas(i, j, c, canvas);
             }
         }
-        viewPort.Pintar(canvas); 
+        viewPort.Pintar(canvas);
     }//GEN-LAST:event_btnInterpolarColores1ActionPerformed
 
     private void btnPintarPixelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPintarPixelActionPerformed
@@ -539,7 +582,7 @@ int colorT;
 //        v.encender(canvas);
 //        
 //        viewPort.Pintar(canvas);
-int colorT;
+        int colorT;
         Color c;
         for (int i = 0; i < 700; i++) {
             for (int j = 0; j < 500; j++) {
@@ -567,7 +610,7 @@ int colorT;
 //        }while(x<=3);
 //        
 //        viewPort.Pintar(canvas);
-int colorT;
+        int colorT;
         Color c;
         for (int i = 0; i < 700; i++) {
             for (int j = 0; j < 500; j++) {
@@ -617,7 +660,7 @@ int colorT;
 //        
 //        
 //        viewPort.Pintar(canvas);
-int colorT;
+        int colorT;
         Color c;
         for (int i = 0; i < 700; i++) {
             for (int j = 0; j < 500; j++) {
@@ -627,7 +670,7 @@ int colorT;
             }
         }
         viewPort.Pintar(canvas);
-        
+
     }//GEN-LAST:event_btnSegmentoActionPerformed
 
     private void btnCircunferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCircunferenciaActionPerformed
@@ -642,7 +685,7 @@ int colorT;
 //        c.setColor(Color.BLACK);
 //        
 //        c.encender(canvas);
-        
+
         /*Circunferencia c1 = new Circunferencia();
         c1.setX0(-2.5);
         c1.setY0(.5);
@@ -673,7 +716,7 @@ int colorT;
         
         c3.encender(canvas);*/
 //        viewPort.Pintar(canvas);
-int colorT;
+        int colorT;
         Color c;
         for (int i = 0; i < 700; i++) {
             for (int j = 0; j < 500; j++) {
@@ -692,43 +735,43 @@ int colorT;
         l.setRadio(4.0);
         l.setColor(Color.black);
         l.encender(canvas);
-        
+
         viewPort.Pintar(canvas);
-        
+
     }//GEN-LAST:event_btnLazoActionPerformed
 
     private void btnMargaritaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMargaritaActionPerformed
         Margarita m = new Margarita();
-        
+
         m.setX0(1.0);
         m.setY0(1.0);
         m.setRadio(4.0);
         m.setColor(Color.BLUE);
         m.encender(canvas);
-        
+
         viewPort.Pintar(canvas);
-        
+
     }//GEN-LAST:event_btnMargaritaActionPerformed
 
     private void btnPuntosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPuntosActionPerformed
         // TODO add your handling code here:
-        Vector v = new Vector ();
-        
+        Vector v = new Vector();
+
         double t = -5.0;
         double dt = 0.001;
-        
-        do{
+
+        do {
             v.setX0(t);
             v.setY0(t * t - 3);
-            
+
             int r = (int) Util.interpolar2Puntos(t, -3.0, 255.0, 5, 0.0);
             int g = (int) Util.interpolar2Puntos(t, -3.0, 255.0, 5, 0.0);
             int b = (int) Util.interpolar2Puntos(t, -3.0, 0.0, 5, 255.0);
-            Color color = new Color (r, g, b);
+            Color color = new Color(r, g, b);
             v.setColor(color);
-            
+
             v.encender(canvas);
-            
+
             /*
             v3d.setY0(Math.pow(2.0, t));
             v3d.setColor(Color.blue);
@@ -739,40 +782,39 @@ int colorT;
             v3d.setColor(Color.cyan);
             v3d.encender(canvas);
             
-            */
+             */
             t += dt;
-        }while(t<=5);
-        
+        } while (t <= 5);
+
         viewPort.Pintar(canvas);
     }//GEN-LAST:event_btnPuntosActionPerformed
 
     private void btnEjesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEjesActionPerformed
         // TODO add your handling code here:
         Segmento s3 = new Segmento();
-        
+
         s3.setX0(0.0);
         s3.setY0(.0);
         s3.setXf(7.0);
         s3.setYf(0.0);
-        s3.setColor(Color.black);        
+        s3.setColor(Color.black);
         s3.encender(canvas);
-        
+
         s3.setX0(0.0);
         s3.setY0(0.0);
         s3.setXf(.0);
         s3.setYf(5.0);
         s3.encender(canvas);
-        
+
         s3.setX0(0.0);
         s3.setY0(.0);
         s3.setXf(-5.0);
         s3.setYf(-5.0);
-        s3.setColor(Color.black);        
+        s3.setColor(Color.black);
         s3.encender(canvas);
-        
-        
+
         viewPort.Pintar(canvas);
-        
+
     }//GEN-LAST:event_btnEjesActionPerformed
 
     private void btnFigurasBasicasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFigurasBasicasActionPerformed
@@ -784,39 +826,38 @@ int colorT;
         s1.setYf(0.0);
         s1.setColor(Color.cyan);
         s1.encender(canvas);
-        
-        
+
         Circunferencia c = new Circunferencia();
         c.setX0(3.5);
         c.setY0(2.5);
         c.setRadio(1.5);
         c.setColor(Color.magenta);
         c.encender(canvas);
-        
+
         Lazo l = new Lazo();
         l.setX0(-3.5);
         l.setY0(2.5);
         l.setRadio(2.0);
         l.setColor(Color.GREEN);
         l.encender(canvas);
-        
+
         Margarita m = new Margarita();
         m.setX0(-3.5);
         m.setY0(-2.5);
         m.setRadio(1.9);
         m.setColor(Color.BLUE);
         m.encender(canvas);
-        
+
         viewPort.Pintar(canvas);
     }//GEN-LAST:event_btnFigurasBasicasActionPerformed
 
     private void btnBorrarSegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarSegActionPerformed
         // TODO add your handling code here:
-        
+
         Lazo l = new Lazo();
         double x = -6.0;
         double y = Math.sin(x);
-        do{
+        do {
             l.setX0(x);
             l.setRadio(0.8);
             l.setY0(y);
@@ -824,7 +865,7 @@ int colorT;
             l.encenderinterpolado(canvas);
             viewPort.Pintar(canvas);
             try {
-                
+
                 Thread.sleep(100);
                 l.setColor(viewPort.getBackground());
                 l.apagar(canvas);
@@ -832,12 +873,12 @@ int colorT;
             } catch (InterruptedException ex) {
                 Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
             x += 0.3;
             y = Math.sin(x);
-            
+
         } while (x <= 6);
-        
+
         /*
         Epicicloide h = new Epicicloide();
         
@@ -847,9 +888,9 @@ int colorT;
         h.setRadio2(1.3);
         h.setColor(Color.yellow);
         h.encender(canvas);
-        */
+         */
         viewPort.Pintar(canvas);
-        
+
     }//GEN-LAST:event_btnBorrarSegActionPerformed
 
     private void btnApaSegmentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApaSegmentoActionPerformed
@@ -857,27 +898,27 @@ int colorT;
         Segmento s1 = new Segmento();
         s1.setX0(-7.0);
         s1.setY0(-5.0);
-        
+
         s1.setXf(5.0);
         s1.setYf(4.0);
-        
+
         s1.setColor(viewPort.getBackground());
-        
+
         s1.apagar(canvas);
-        
+
         viewPort.Pintar(canvas);
     }//GEN-LAST:event_btnApaSegmentoActionPerformed
 
     private void btnPruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPruebaActionPerformed
         // TODO add your handling code here:
         Mariposa m = new Mariposa();
-        
+
         m.setX0(0.0);
         m.setY0(0.0);
         m.encender(canvas);
-        
+
         viewPort.Pintar(canvas);
-        
+
     }//GEN-LAST:event_btnPruebaActionPerformed
 
     private void jMPruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMPruebaActionPerformed
@@ -943,8 +984,8 @@ int colorT;
         s.setColor(Color.black);
         
         s.encender(canvas);
-        */
-        
+         */
+
 //        SuperficieR sr = new SuperficieR();
 //        sr.setX0(0.0);
 //        sr.setY0(0.0);
@@ -962,7 +1003,7 @@ int colorT;
         Color c;
         for (int i = 0; i < 700; i++) {
             for (int j = 0; j < 500; j++) {
-                colorT = (int) ((Math.pow(i,2) + j)%15);
+                colorT = (int) ((Math.pow(i, 2) + j) % 15);
                 c = paleta1[colorT];
                 viewPort.pintarPixelCanvas(i, j, c, canvas);
             }
@@ -972,31 +1013,31 @@ int colorT;
 
     private void jmEjes3DActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmEjes3DActionPerformed
         Segmento3D s3d = new Segmento3D();
-        
+
         s3d.setColor(Color.red);
-        
+
         s3d.setX0(0.0);
         s3d.setY0(0.0);
         s3d.setZ0(0.0);
-        
+
         s3d.setXf(8.0);
         s3d.setYf(0.0);
         s3d.setZf(0.0);
-        
+
         s3d.encender(canvas);
-        
+
         s3d.setXf(0.0);
         s3d.setYf(0.0);
         s3d.setZf(4.0);
-        
+
         s3d.encender(canvas);
-        
+
         s3d.setXf(0.0);
         s3d.setYf(5.0);
         s3d.setZf(0.0);
-        
+
         s3d.encender(canvas);
-        
+
         s3d.setColor(Color.gray);
         /**
          * Seegmentos de los ejes
@@ -1004,57 +1045,57 @@ int colorT;
         s3d.setX0(8.0);
         s3d.setY0(0.0);
         s3d.setZ0(0.0);
-        
+
         s3d.setXf(8.0);
         s3d.setYf(0.0);
         s3d.setZf(4.0);
-        
+
         s3d.encender(canvas);
-        
+
         s3d.setX0(0.0);
         s3d.setY0(0.0);
         s3d.setZ0(4.0);
-        
+
         s3d.setXf(8.0);
         s3d.setYf(0.0);
         s3d.setZf(4.0);
-        
+
         s3d.encender(canvas);
-        
+
         s3d.setXf(0.0);
         s3d.setYf(5.0);
         s3d.setZf(4.0);
-        
+
         s3d.encender(canvas);
-        
+
         s3d.setX0(0.0);
         s3d.setY0(5.0);
         s3d.setZ0(0.0);
-        
+
         s3d.setXf(0.0);
         s3d.setYf(5.0);
         s3d.setZf(4.0);
-        
+
         s3d.encender(canvas);
-        
+
         s3d.setX0(8.0);
         s3d.setY0(0.0);
         s3d.setZ0(0.0);
-        
+
         s3d.setXf(8.0);
         s3d.setYf(5.0);
         s3d.setZf(0.0);
-        
+
         s3d.encender(canvas);
-        
+
         s3d.setX0(8.0);
         s3d.setY0(5.0);
         s3d.setZ0(0.0);
-        
+
         s3d.setXf(0.0);
         s3d.setYf(5.0);
         s3d.setZf(0.0);
-        
+
         s3d.encender(canvas);
         /*
         s3d.setX0(0.0);
@@ -1114,9 +1155,8 @@ int colorT;
 
             s1_3d.encenderP2(canvas);
         }
-        */
-        
-        
+         */
+
         viewPort.Pintar(canvas);
     }//GEN-LAST:event_jmEjes3DActionPerformed
 
@@ -1155,13 +1195,13 @@ int colorT;
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 FrmPrincipal vP = new FrmPrincipal();
-                
+
                 Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-                
+
                 Dimension vS = vP.getSize();
-                
-                vP.setLocation((d.height - vS.height)/2, (d.width - vS.width)/2);
-                
+
+                vP.setLocation((d.height - vS.height) / 2, (d.width - vS.width) / 2);
+
                 vP.setVisible(true);
             }
         });
@@ -1169,32 +1209,32 @@ int colorT;
 
     BufferedImage canvas;
     ViewPort viewPort;
-    
+
     ModelosMatematicos modelosMat;
-    
-    Color[] paleta1 = 
-    {   Color.black,
-        new Color(29,50,88), //navy
-        Color.green, 
-        new Color(1, 175, 239), //aqua
-        Color.red,
-        new Color(112, 48, 161), //purple
-        new Color(132, 60, 11),
-        Color.lightGray,
-        Color.darkGray,
-        Color.blue,
-        new Color(146, 208, 80),
-        new Color(166, 166, 166),
-        new Color(83, 129, 55),
-        new Color(176, 7, 83),
-        Color.yellow,
-        Color.white
-    };
-    
+
+    Color[] paleta1
+            = {Color.black,
+                new Color(29, 50, 88), //navy
+                Color.green,
+                new Color(1, 175, 239), //aqua
+                Color.red,
+                new Color(112, 48, 161), //purple
+                new Color(132, 60, 11),
+                Color.lightGray,
+                Color.darkGray,
+                Color.blue,
+                new Color(146, 208, 80),
+                new Color(166, 166, 166),
+                new Color(83, 129, 55),
+                new Color(176, 7, 83),
+                Color.yellow,
+                Color.white
+            };
+
     Color[] paleta2;
 
     // 
-        // 
+    // 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem BtnPintar2Colores;
     private javax.swing.JButton BtnPintar2Colores1;
