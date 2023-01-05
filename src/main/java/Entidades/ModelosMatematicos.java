@@ -15,11 +15,11 @@ public class ModelosMatematicos {
     protected final int sx2 = 700;
     protected final int sy2 = 500;
     
-    protected double x1 = -7;
-    protected double y1 = -5;
+    protected double x1 = -10.5;//-7
+    protected double y1 = -7.5;//-5
     
-    protected double x2 = 7;
-    protected double y2 = 5;
+    protected double x2 = 10.5;//7
+    protected double y2 = 7.5;//5
     
     protected int sx;
     protected int sy;

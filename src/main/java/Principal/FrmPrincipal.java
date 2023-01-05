@@ -130,7 +130,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnPintarPixel.setText("Tapete 3");
+        btnPintarPixel.setText("Parcial 2");
         btnPintarPixel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPintarPixelActionPerformed(evt);
@@ -403,30 +403,27 @@ public class FrmPrincipal extends javax.swing.JFrame {
         double xp = modelosMat.getX();
         double yp = Util.interpolar3Puntos(xp, -7.0, 0.0, 0.0, 2.72, 7.0, 0.0);
         s.setXf(xp);
-        
+
         s.setYf(yp);
 
         s.encender(canvas);
-        
+
         s.setColor(Color.red);
         s.setX0(xp);
         s.setY0(yp);
         double xf = 0.0;
         double dx = Util.dxInterpolar3Puntos(xp, -7.0, 0.0, 0.0, 2.72, 7.0, 0.0);;
-        if(xp < 0){
-             xf = 7;
-             s.setXf(xf);
-             s.setYf(((-1/dx) * (xf - xp)) + yp);
+        if (xp < 0) {
+            xf = 7;
+            s.setXf(xf);
+            s.setYf(((-1 / dx) * (xf - xp)) + yp);
         } else {
-             xf = -7;
-             s.setXf(xf);
-             s.setYf(((-1/dx) * (xf - xp)) + yp);
+            xf = -7;
+            s.setXf(xf);
+            s.setYf(((-1 / dx) * (xf - xp)) + yp);
         }
         s.encender(canvas);
-        
-        
-        
-        
+
         viewPort.Pintar(canvas);
     }
 
@@ -519,9 +516,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
         } while (t <= 7);
 
         viewPort.Pintar(canvas);
-        
+
         System.out.println("---------------------------------------");
-        System.out.println("dx = "+ Util.dxInterpolar3Puntos(9, -7.0, 0.0, 0.0, 2.72, 7.0, 0.0));
+        System.out.println("dx = " + Util.dxInterpolar3Puntos(9, -7.0, 0.0, 0.0, 2.72, 7.0, 0.0));
 
     }//GEN-LAST:event_BtnPintar2Colores1ActionPerformed
 
@@ -552,25 +549,104 @@ public class FrmPrincipal extends javax.swing.JFrame {
 //        }
 //        viewPort.Pintar(canvas); 
 
-        double t = 3;
+//  Paleta del examen 
+//
+        Color[] paletaE = new Color[16];
+        int r = 0;
+        int g = 0;
+        int b = 0;
+        //113, 135, 149
+        //204, 213, 218
+        for (int i = 0; i < 16; i++) {
+            r = (int) Util.interpolar2Puntos(i, 0, 100, 15, 230);
+            g = (int) Util.interpolar2Puntos(i, 0, 100, 15, 230);
+            b = (int) Util.interpolar2Puntos(i, 0, 105, 15, 220);
+            paletaE[i] = new Color(r, g, b);
+        }
+
+// Proceso onda
+//        double t = 3;
+//
+//        double x, y, z;
+//        double w = 1.1;
+//        double v = 9.3;
+//        for (int i = 0; i < 700; i++) {
+//            for (int j = 0; j < 500; j++) {
+//                modelosMat.realXY(i, j);
+//                x = modelosMat.getX();
+//                y = modelosMat.getY();
+//                z = w * (Math.sqrt(x * x + y * y)) - v * t;
+//                z = Math.sin(z) + 1;
+//                int color = (int) (z * 7.5);
+//                Color c = paletaE[color];
+//                viewPort.pintarPixelCanvas(i, j, c, canvas);
+//            }
+//        }
+        //  Metodo interferencia
+//        double t = 0;
+//
+//        double x, y, z, z1, z2, z3;
+//        double w = 1.1;
+//        double v = 9.3;
+//        for (int i = 0; i < 700; i++) {
+//            for (int j = 0; j < 500; j++) {
+//                modelosMat.realXY(i, j);
+//                x = modelosMat.getX();
+//                y = modelosMat.getY();
+//                z1 = w * (Math.sqrt(Math.pow(x + 0, 2) + Math.pow(y - 3, 2))) - v * t;
+//                z2 = w * (Math.sqrt(Math.pow(x + 0, 2) + Math.pow(y + 3, 2))) - v * t;
+//                z3 = w * (Math.sqrt(Math.pow(x - 1, 2) + Math.pow(y - 2, 2))) - v * t;
+//                z1 = Math.sin(z1) + 1;
+//                z2 = Math.sin(z2) + 1;
+//                z3 = Math.sin(z3) + 1;
+//                z = z1 + z2 + z3;
+//                int color = (int) (z * (15/6));
+//                Color c = paleta1[color];
+//                viewPort.pintarPixelCanvas(i, j, c, canvas);
+//            }
+//        }
+//        viewPort.Pintar(canvas);
+        // Proceso onda animada
+        double t = 0;
 
         double x, y, z;
         double w = 1.1;
         double v = 9.3;
-        for (int i = 0; i < 700; i++) {
-            for (int j = 0; j < 500; j++) {
-                modelosMat.realXY(i, j);
-                x = modelosMat.getX();
-                y = modelosMat.getY();
-                z = w * (Math.sqrt(x * x + y * y)) - v * t;
-                z = Math.sin(z) + 1;
-                int color = (int) (z * 7.5);
-                Color c = paleta1[color];
-                viewPort.pintarPixelCanvas(i, j, c, canvas);
+        do {
+            for (int i = 0; i < 700; i++) {
+                for (int j = 0; j < 500; j++) {
+                    int color = getColorInterferencia(i, j, t);
+                    Color c = paleta1[color];
+                    System.out.println("c = "+c);
+                    viewPort.pintarPixelCanvas(i, j, c, canvas);
+                }
             }
-        }
-        viewPort.Pintar(canvas);
+            viewPort.Pintar(canvas);
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            t += 0.05;
+        } while (t <= 15);
     }//GEN-LAST:event_btnInterpolarColores1ActionPerformed
+
+    private int getColorInterferencia(int i, int j, double t) {
+        double x, y, z, z1, z2, z3;
+        double w = 1.1;
+        double v = 9.3;
+        modelosMat.realXY(i, j);
+        x = modelosMat.getX();
+        y = modelosMat.getY();
+        z1 = w * (Math.sqrt(Math.pow(x + 0, 2) + Math.pow(y - 3, 2))) - v * t;
+        z2 = w * (Math.sqrt(Math.pow(x + 0, 2) + Math.pow(y + 3, 2))) - v * t;
+        z3 = w * (Math.sqrt(Math.pow(x + 3, 2) + Math.pow(y + 3, 2))) - v * t;
+        z1 = Math.sin(z1) + 1;
+        z2 = Math.sin(z2) + 1;
+        z3 = Math.sin(z3) + 1;
+        z = z1 + z2 + z3;
+        return (int) (z * (15 / 6));
+    }
 
     private void btnPintarPixelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPintarPixelActionPerformed
 //        Vector v = new Vector ();
@@ -582,16 +658,56 @@ public class FrmPrincipal extends javax.swing.JFrame {
 //        v.encender(canvas);
 //        
 //        viewPort.Pintar(canvas);
-        int colorT;
-        Color c;
-        for (int i = 0; i < 700; i++) {
-            for (int j = 0; j < 500; j++) {
-                colorT = (int) (((Math.pow(j, 2) * (j + i)) / 2) % 15);
-                c = paleta1[colorT];
-                viewPort.pintarPixelCanvas(i, j, c, canvas);
-            }
-        }
+
+// Alfombra
+//        int colorT;
+//        Color c;
+//        for (int i = 0; i < 700; i++) {
+//            for (int j = 0; j < 500; j++) {
+//                colorT = (int) (((Math.pow(j, 2) * (j + i)) / 2) % 15);
+//                c = paleta1[colorT];
+//                viewPort.pintarPixelCanvas(i, j, c, canvas);
+//            }
+//        }
+//        viewPort.Pintar(canvas);
+        //Reloj
+        double x = 1.0, y = 1.5;
+
+        Circunferencia c = new Circunferencia();
+        c.setRadio(2.0);
+        c.setX0(x);
+        c.setY0(y);
+
+        c.encender(canvas);
         viewPort.Pintar(canvas);
+
+        Segmento s = new Segmento();
+        s.setColor(Color.red);
+
+        s.setX0(x);
+        s.setY0(y);
+
+        double t = 0.5 * Math.PI;
+        double dt = 0.5;
+        do {
+            s.setColor(Color.red);
+            s.setXf(x + ((x * 0.9) * Math.cos(t)));
+            s.setYf(y + ((y * 0.9) * Math.sin(t)));
+            s.encender(canvas);
+            viewPort.Pintar(canvas);
+            try {
+
+                Thread.sleep(100);
+                s.setColor(viewPort.getBackground());
+                s.apagar(canvas);
+                viewPort.Pintar(canvas);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            t -= dt;
+        } while (t >= -1.5 * Math.PI);
+
+        //viewPort.Pintar(canvas);
     }//GEN-LAST:event_btnPintarPixelActionPerformed
 
     private void btnSecuenciaPixcelesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSecuenciaPixcelesActionPerformed

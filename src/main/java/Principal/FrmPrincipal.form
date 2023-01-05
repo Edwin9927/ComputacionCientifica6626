@@ -271,7 +271,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnPintarPixel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Tapete 3"/>
+        <Property name="text" type="java.lang.String" value="Parcial 2"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPintarPixelActionPerformed"/>
